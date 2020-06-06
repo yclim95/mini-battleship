@@ -35,7 +35,11 @@ public class OceanMap implements Coordinate {
 
             for (int j = 0; j <= coordinates[i].length; j++) {
                 if (j == Y_COORDINATE_MAX) System.out.print("| " + i);
-                else System.out.print(" ");
+                else {
+                    if (coordinates[i][j] == 1) {
+                        System.out.print("@");
+                    }else System.out.print(" ");
+                }
             }
             System.out.println("");
             if (i == coordinates.length - 1) System.out.println(getLabel("0123456789", 3));
