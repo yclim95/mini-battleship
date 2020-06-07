@@ -3,6 +3,7 @@
  */
 package com.battleshipsgame;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class BattleShipsGame {
@@ -13,9 +14,13 @@ public class BattleShipsGame {
         int playerNumShip = PlayerShip.MAX_NUM_SHIP;
         int computerNumShip = ComputerShip.MAX_NUM_SHIP;
         int[][] playerCoordinates;
+        int[][] computerCoordinates;
 
         PlayerShip playerShip = new PlayerShip();
         playerCoordinates = playerShip.getCoordinates();
+
+        ComputerShip computerShip = new ComputerShip();
+        computerCoordinates = computerShip.getCoordinates();
 
         // Step 1 - Create the ocean map
         OceanMap map = new OceanMap();
@@ -46,8 +51,34 @@ public class BattleShipsGame {
             } while (check==false); // while layer's ship exist on the coordinates entered (based on the map)
 
         }
-        playerShip.setCoordinates(playerCoordinates);
-        map.printMap(playerShip.getCoordinates());
+        playerShip.setCoordinates(playerCoordinates); //setCoordinate for player's ships
+        map.printMap(playerShip.getCoordinates()); //print the ship location on the map
+
+        // Step 3 - Deploy computer's ships
+        System.out.println("Computer is Deploying ships");
+        for (int i = 0; i < computerNumShip; i++) {
+
+            do {
+                // set random coordinate to set the location of computer's ships (5) on the map
+                Random rand = new Random();
+                int index = rand.nextInt(10); // random index between [0 - 10]
+                xCoordinate = index;
+                index = rand.nextInt(10); // regenerate random index between [0 - 10]
+                yCoordinate = index;
+
+                check = true;
+                // Check if player's ship exist on the coordinates entered (based on the map)
+                if (computerCoordinates[xCoordinate][yCoordinate] == 1) {
+                    check = false;
+                }else {computerCoordinates[xCoordinate][yCoordinate] = 1;
+                System.out.println((i+1) + ". Ship DEPLOYED");}
+            } while (check==false); // while layer's ship exist on the coordinates entered (based on the map)
+
+        }
+
+        computerShip.setCoordinates(computerCoordinates); //setCoordinate for computer's ships
+        map.printMap(computerShip.getCoordinates()); //print the ship location on the map
+
         // Step 4 - Battle
         // Step 4.1 - Player's Turn
         // Step 4.2 - Computer's Turn
