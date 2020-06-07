@@ -68,9 +68,9 @@ public class BattleShipsGame {
 
                 check = true;
                 // Check if player's ship exist on the coordinates entered (based on the map)
-                if (computerCoordinates[xCoordinate][yCoordinate] == 1) {
+                if (computerCoordinates[xCoordinate][yCoordinate] == 2) {
                     check = false;
-                }else {computerCoordinates[xCoordinate][yCoordinate] = 1;
+                }else {computerCoordinates[xCoordinate][yCoordinate] = 2;
                 System.out.println((i+1) + ". Ship DEPLOYED");}
             } while (check==false); // while layer's ship exist on the coordinates entered (based on the map)
 
@@ -81,6 +81,43 @@ public class BattleShipsGame {
 
         // Step 4 - Battle
         // Step 4.1 - Player's Turn
+        /*
+         * 4.1.2 Player correctly guessed coordinates of computer’s ship (computer loses ship).
+         * 4.1.2.1 You should tell the user "Boom! You sunk the ship!"
+         * 4.1.2.2 You should mark this as a hit when printing the map as a "!". You can choose how to store this
+         *          result within your own code.
+         * 4.1.3 Player entered coordinates of his/her own ship (player loses ship).
+         * 4.1.3.1 You should tell the user "Oh no, you sunk your own ship :("
+         * 4.1.3.2 You should mark this as an "x" when printing the map, replacing the "@"
+         * 4.1.4 Player missed. No ship on the entered coordinates. "Sorry, you missed"
+         * 4.1.4.1 You should mark this as an "-" when printing the map.
+         */
+        System.out.println("YOUR TURN");
+        System.out.print("Enter X coordinate: ");
+        xCoordinate = input.nextInt();
+        System.out.print("Enter Y coordinate: ");
+        yCoordinate = input.nextInt();
+
+        if (computerCoordinates[xCoordinate][yCoordinate] == 2){
+            System.out.println("Boom! You sunk the ship!");
+            computerCoordinates[xCoordinate][yCoordinate] = 3; // means "!" / mark as 'sunk ship'
+            playerCoordinates[xCoordinate][yCoordinate] = 3; // mark in player's map
+        }else if (playerCoordinates[xCoordinate][yCoordinate] == 1){
+            System.out.println("Oh no, you sunk your own ship :(");
+            playerCoordinates[xCoordinate][yCoordinate] = 4; // means "x" / mark as 'player loses ship'
+        }else {
+            System.out.println("Sorry, you missed");
+            playerCoordinates[xCoordinate][yCoordinate] = 5; // means "-" / mark as 'missed'
+        }
+
+
+        computerShip.setCoordinates(computerCoordinates); //update Coordinate mark for computer's ships
+        playerShip.setCoordinates(playerCoordinates); //update player map coordinates
+        map.printMap(playerShip.getCoordinates()); //print the ship location on the map
+
+
+
+
         // Step 4.2 - Computer's Turn
         // Step 5 - Game Over
     }
