@@ -119,6 +119,45 @@ public class BattleShipsGame {
 
 
         // Step 4.2 - Computer's Turn
+        /*
+         * 4.2.1 Computer guessed coordinates of the player’s ship (player loses ship).
+         * 4.2.1.1 You should inform the user "The Computer sunk one of your ships!"
+         * 4.2.1.2 You should mark this as an "x" when printing the map
+         * 4.2.2 Computer guessed coordinates of its own ship (computer loses ship).
+         * 4.2.1.2 You should inform the user "The Computer sunk one of its own ships"
+         * 4.2.1.3 You should mark this as a "!" when printing the map
+         * 4.2.3 Computer missed. No ship on guessed coordinates.
+         * 4.2.3.1 You should inform the user "Computer missed".
+         * 4.2.3.2 You do not need to mark the map with the missed computer guesses, however you will want to
+                    decide a way to store this information in your map so the computer doesn't duplicate guesses
+                    later.
+         */
+        System.out.println("COMPUTER'S TURN");
+        // set random coordinate
+        Random rand = new Random();
+        int index = rand.nextInt(10); // random index between [0 - 10]
+        xCoordinate = index;
+        index = rand.nextInt(10); // regenerate random index between [0 - 10]
+        yCoordinate = index;
+
+        if (playerCoordinates[xCoordinate][yCoordinate] == 1){
+            System.out.println("The Computer sunk one of your ships!");
+            playerCoordinates[xCoordinate][yCoordinate] = 4; // mark "x" / mark as 'player loses ship'
+        }else if (computerCoordinates[xCoordinate][yCoordinate] == 2){
+            System.out.println("The Computer sunk one of its own ships");
+            playerCoordinates[xCoordinate][yCoordinate] = 3; // means "!" / mark as 'computer loses ship'
+        }else {
+            System.out.println("Computer missed");
+            computerCoordinates[xCoordinate][yCoordinate] = 6; // means "-" / mark as 'missed'
+        }
+
+
+        computerShip.setCoordinates(computerCoordinates); //update Coordinate mark for computer's ships
+        playerShip.setCoordinates(playerCoordinates); //update player map coordinates
+        map.printMap(playerShip.getCoordinates()); //print the ship location on the map
+
+
+
         // Step 5 - Game Over
     }
 }
