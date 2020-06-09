@@ -42,32 +42,42 @@ public class BattleShipsGame {
     }
 
     public static void deployPlayerShip() {
-        int xCoordinate;
-        int yCoordinate;
+        int xCoordinate = 0;
+        int yCoordinate = 0;
+        boolean valid ;
         System.out.println("Deploy your ships");
+
         for (int i = 0; i < PlayerShip.NUM_SHIP; ) {
+               do {
+                   try {
+                       // Ask for user's input on coordinate to set the location of player's ship on the map
+                       System.out.print("\nEnter X coordinate for your " + (i + 1) + ". ship:");
+                       xCoordinate = input.nextInt();
+                       System.out.print("Enter Y coordinate for your " + (i + 1) + ". ship:");
+                       yCoordinate = input.nextInt();
+                       valid = true;
+                   } catch (Exception e) {
+                       input.nextLine();
+                       valid = false;
+                       System.err.println("\nInvalid");
+                   }
+               }while (!valid);
 
-            // Ask for user's input on coordinate to set the location of player's ship on the map
-            System.out.print("Enter X coordinate for your " + (i + 1) + ". ship:");
-            xCoordinate = input.nextInt();
-            System.out.println();
-            System.out.print("Enter Y coordinate for your " + (i + 1) + ". ship:");
-            yCoordinate = input.nextInt();
-            System.out.println();
 
+            System.out.println();
             // Check if player's ship exist on the coordinates entered (based on the map)
             if (!(xCoordinate >= 0 && xCoordinate < 10) || !(yCoordinate >= 0 && yCoordinate < 10)) {
-                System.out.println("You can't place ships outside the 10 by 10 grid");
+                System.out.println("\nYou can't place ships outside the 10 by 10 grid");
             } else if (mapCoordinates[xCoordinate][yCoordinate] == 1) {
-                System.out.println("You can NOT place 2 or more ships on the same location");
+                System.out.println("\nYou can NOT place 2 or more ships on the same location");
             } else {
                 mapCoordinates[xCoordinate][yCoordinate] = 1;
                 i++; // Player ship exist on the coordinate entered (based on the map)
             }
-
         }
         map.setCoordinates(mapCoordinates); //setCoordinate for player's ships
         map.printMap(mapCoordinates); //print the ship location on the map
+
     }
 
     public static void deployComputerShip() {

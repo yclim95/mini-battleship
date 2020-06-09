@@ -36,7 +36,7 @@ public class OceanMap implements Coordinate {
             for (int j = 0; j <= coordinates[i].length; j++) {
                 if (j == Y_COORDINATE_MAX) System.out.print("| " + i);
                 else {
-                    if (coordinates[i][j] == 1 || coordinates[i][j] == 2) {
+                    if (coordinates[i][j] == 1) {
                         System.out.print("@");
                     }else if (coordinates[i][j] == 3) {
                         System.out.print("!");  // Player Sink computer's ship
