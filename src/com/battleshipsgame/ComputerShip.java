@@ -1,7 +1,7 @@
 package com.battleshipsgame;
 
 public class ComputerShip extends Ship implements Score {
-    public final static int MAX_NUM_SHIP = 5;
+    public static int MAX_NUM_SHIP = 5;
     private int numShip;
 
     public int getNumShip() {
