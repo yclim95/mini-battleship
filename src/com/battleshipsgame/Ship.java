@@ -1,20 +1,17 @@
 package com.battleshipsgame;
 
-public class Ship implements Coordinate {
-    private final int X_COORDINATE_MAX = 10;
-    private final int Y_COORDINATE_MAX = 10;
-    private int[][] coordinates;
+public class Ship implements Score{
+    private static final int STARTING_SCORE = 5;
+    private int score;
 
-    Ship() {
-        this.coordinates = new int[X_COORDINATE_MAX][Y_COORDINATE_MAX];
+    Ship(){
+        this.score = STARTING_SCORE;
+    }
+    public int getScore() {
+        return this.score;
     }
 
-    public void setCoordinates(int[][] coordinates) {
-        this.coordinates = coordinates;
+    public void setScore(int score) {
+        this.score = score;
     }
-
-    public int[][] getCoordinates() {
-        return this.coordinates;
-    }
-
 }

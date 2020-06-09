@@ -61,4 +61,11 @@ public class OceanMap implements Coordinate {
         return this.coordinates;
     }
 
+    public int xCoordinateMax(){
+        return this.X_COORDINATE_MAX;
+    }
+
+    public int yCoordinateMax(){
+        return this.Y_COORDINATE_MAX;
+    }
 }
